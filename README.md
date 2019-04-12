@@ -1,4 +1,4 @@
-# Aplikacija pohodnika
+# Aplikacija pohodnik
 Aplikacija "pohodnik" je sistem za vodenje evidence pohodnikov ter njihovega udeleževanja na pohodih.
 
 ## Tehnologija
