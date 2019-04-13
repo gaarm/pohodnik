@@ -8,7 +8,7 @@ public class LoginController {
     @FXML private Text actiontarget;
 
     @FXML protected void handleSubmitButtonAction(ActionEvent event) {
-
+        DBConnection.main();
         actiontarget.setText("Sign in button pressed");
     }
 

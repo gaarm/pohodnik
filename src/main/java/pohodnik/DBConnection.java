@@ -1,26 +1,40 @@
 package pohodnik;
 
-import java.io.Console;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DBConnection {
 
-    public static void main() {
+    private Connection conn;
+    private PreparedStatement ps;
+    private ResultSet rs;
 
-        String url = "jdbc:mysql://localhost:3306/pohodnik?useSSL=false";
-        String user = "root";
-        String password = "example";
+    public DBConnection() {
 
-        String query = "SELECT * FROM members";
-        try (Connection con = DriverManager.getConnection(url, user, password);
-             Statement st = con.createStatement();
-             ResultSet rs = st.executeQuery(query)) {
+        try {
+            String url = "jdbc:mysql://localhost:3306/pohodnik?useSSL=false";
+            String user = "root";
+            String password = "example";
 
-            while (rs.next()) {
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(DBConnection.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public boolean canLogin(String username, String password) {
+        String query = "SELECT * FROM members WHERE username = ? AND password = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
                 System.out.println(rs.getString("email"));
-
+                return true;
             }
 
         } catch (SQLException ex) {
@@ -28,5 +42,6 @@ public class DBConnection {
             Logger lgr = Logger.getLogger(DBConnection.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
+        return false;
     }
 }
