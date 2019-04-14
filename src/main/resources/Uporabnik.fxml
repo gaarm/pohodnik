@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pohodnik.UporabnikController">
     <top>
@@ -26,9 +28,16 @@
             </padding>
         </HBox>
     </top>
-   <left>
-        <ListView fx:id="listView" prefHeight="300.0" prefWidth="441.0" BorderPane.alignment="CENTER">
-
-        </ListView>
-   </left>
+    <left>
+       <TableView fx:id="tableView" layoutX="26.0" layoutY="29.0" prefHeight="300.0" prefWidth="360.0">
+           <columns>
+               <TableColumn fx:id="username" prefWidth="164.0" text="Username">
+                   <cellValueFactory><PropertyValueFactory property="username" /></cellValueFactory>
+               </TableColumn>
+               <TableColumn fx:id="email" prefWidth="194.0" text="Email">
+                   <cellValueFactory><PropertyValueFactory property="email" /></cellValueFactory>
+               </TableColumn>
+           </columns>
+       </TableView>
+    </left>
 </BorderPane>
