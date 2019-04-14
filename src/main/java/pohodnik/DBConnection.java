@@ -62,7 +62,10 @@ public class DBConnection {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                memberList.add(new Member(rs.getString("username"), rs.getString("email")));
+                memberList.add(new Member(rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("password"))
+                );
             }
         } catch (SQLException ex) {
 
@@ -70,8 +73,24 @@ public class DBConnection {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-
-
         return memberList;
+    }
+
+    public boolean addMember(Member member) {
+        String query = "INSERT INTO members (username, email, password) VALUES (?, ?, ?)";
+
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, member.getUsername());
+            ps.setString(2, member.getEmail());
+            ps.setString(3, member.getPassword());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(DBConnection.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return false;
     }
 }

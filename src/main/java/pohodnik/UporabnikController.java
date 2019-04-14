@@ -4,10 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputEvent;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,8 +19,16 @@ public class UporabnikController {
     @FXML
     private TextField textSearch;
 
-    public UporabnikController() throws SQLException {
-        System.out.println("xxx");
+    @FXML
+    private TextField textUsername;
+
+    @FXML
+    private TextField textEmail;
+
+    @FXML
+    private TextField actionTarget;
+
+    public UporabnikController() {
     }
 
     @FXML
@@ -35,4 +41,14 @@ public class UporabnikController {
         tableView.getItems().setAll(data);
     }
 
+    @FXML
+    protected void addAction(ActionEvent event) throws SQLException {
+        DBConnection dbConnection = new DBConnection();
+        Member member = new Member(textUsername.getText(), textEmail.getText(), "hidden");
+        if (dbConnection.addMember(member)) {
+            actionTarget.setText("Uporabnik uspešno dodan!");
+        } else {
+            actionTarget.setText("Napaka pri dodajanju!");
+        }
+    }
 }

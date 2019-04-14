@@ -3,9 +3,7 @@
 <?import javafx.scene.control.cell.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pohodnik.UporabnikController">
     <top>
@@ -22,6 +20,8 @@
                     </HBox.margin>
                 </TextField>
                 <Button fx:id="buttonSearch" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Search!" />
+                <TextField fx:id="actionTarget"></TextField>
+
             </children>
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -40,4 +40,14 @@
            </columns>
        </TableView>
     </left>
+    <right>
+        <HBox alignment="top_right" prefHeight="63.0" prefWidth="240.0" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
+           <children>
+               <TextField fx:id="textUsername" prefWidth="90" promptText="First Name" />
+               <TextField fx:id="textEmail" prefWidth="90" promptText="Last Name" />
+               <Button onAction="#addAction" text="Add" />
+           </children>
+        </HBox>
+        
+    </right>
 </BorderPane>

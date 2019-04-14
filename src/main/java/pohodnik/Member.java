@@ -3,10 +3,12 @@ package pohodnik;
 public class Member {
     private String username;
     private String email;
+    private String password;
 
-    public Member(String username, String email) {
+    public Member(String username, String email, String password) {
         this.username = username;
         this.email = email;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -23,5 +25,13 @@ public class Member {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
