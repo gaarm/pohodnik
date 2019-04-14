@@ -14,6 +14,7 @@ public class Login extends Application {
 
         stage.setTitle("Prijavno okno");
         stage.setScene(new Scene(root, 400, 350));
+        stage.setResizable(false);
         stage.show();
     }
 
