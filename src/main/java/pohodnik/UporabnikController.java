@@ -1,30 +1,64 @@
 package pohodnik;
-//https://stackoverflow.com/questions/44735486/javafx-scenebuilder-search-listview
-import javafx.beans.Observable;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputEvent;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.util.Callback;
 
-import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class UporabnikController {
     protected String searchString;
 
-    private ObservableList<String> list = FXCollections.observableArrayList();
-    @FXML private ListView<String> lstArtiest;
+    @FXML
+    private ListView<Member> listView;
 
-    @FXML private TextField textSearch;
+    @FXML
+    private TextField textSearch;
 
-    public UporabnikController() {
+    public UporabnikController() throws SQLException {
+        System.out.println("xxx");
+
+
+    }
+
+    @FXML
+    protected void handleSubmitButtonAction(ActionEvent event) throws SQLException {
+        System.out.println(textSearch.getText().trim());
+        DBConnection dbConnection = new DBConnection();
+        List<Member> memberList = dbConnection.getMembers(textSearch.getText().trim());
+
+        ObservableList<Member> data = FXCollections.observableList(memberList);
+
+        listView.setItems(data);
+
+        listView.setCellFactory(new Callback<ListView<Member>, ListCell<Member>>(){
+
+            @Override
+            public ListCell<Member> call(ListView<Member> p) {
+
+                ListCell<Member> cell = new ListCell<Member>(){
+
+                    @Override
+                    protected void updateItem(Member t, boolean bln) {
+                        super.updateItem(t, bln);
+                        if (t != null) {
+                            setText(t.getUsername() + " " + t.getEmail());
+                        }
+                    }
+
+                };
+
+                return cell;
+            }
+        });
+
     }
 
     @FXML
@@ -36,16 +70,10 @@ public class UporabnikController {
 
     @FXML
     public void initialize() {
-
-        loadList(Query);
-
+        loadList(searchString);
     }
 
-
-
-    public void loadList(String Query) {
-
-
+    public void loadList(String searchString) {
 
 
     }

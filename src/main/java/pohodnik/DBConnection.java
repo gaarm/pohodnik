@@ -1,6 +1,12 @@
 package pohodnik;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.w3c.dom.Entity;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,5 +49,29 @@ public class DBConnection {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return false;
+    }
+
+    public List<Member> getMembers(String searchString) throws SQLException {
+        String query = "SELECT * FROM members WHERE username LIKE ? OR email LIKE ?";
+        List<Member> memberList = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%" + searchString + "%");
+            ps.setString(2, "%" + searchString + "%");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                memberList.add(new Member(rs.getString("username"), rs.getString("email")));
+            }
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(DBConnection.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+
+
+        return memberList;
     }
 }
