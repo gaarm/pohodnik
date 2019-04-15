@@ -41,13 +41,31 @@
        </TableView>
     </left>
     <right>
-        <HBox alignment="top_right" prefHeight="63.0" prefWidth="240.0" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
-           <children>
-               <TextField fx:id="textUsername" prefWidth="90" promptText="First Name" />
-               <TextField fx:id="textEmail" prefWidth="90" promptText="Last Name" />
-               <Button onAction="#addAction" text="Add" />
-           </children>
-        </HBox>
-        
+        <VBox alignment="top_right" prefHeight="63.0" prefWidth="240.0" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
+           <HBox>
+               <children>
+                   <Label text="User name">
+                       <padding><Insets right="10.0" /></padding>
+                   </Label>
+                   <TextField fx:id="textUsername" prefWidth="90" promptText="First Name" />
+               </children>
+           </HBox>
+            <HBox>
+            <children>
+               <Label text="Email">
+                   <padding><Insets right="10.0" /></padding>
+               </Label>
+               <TextField fx:id="textEmail" prefWidth="90" promptText="Username" />
+            </children>
+            </HBox>
+            <HBox>
+                <children>
+                    <Label text="pass">
+                        <padding><Insets right="10.0" /></padding>
+                    </Label>
+                    <TextField fx:id="textPassword" prefWidth="90" promptText="Username" />
+                </children>
+            </HBox>
+        </VBox>
     </right>
 </BorderPane>

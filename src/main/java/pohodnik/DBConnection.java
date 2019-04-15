@@ -1,9 +1,5 @@
 package pohodnik;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.w3c.dom.Entity;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
