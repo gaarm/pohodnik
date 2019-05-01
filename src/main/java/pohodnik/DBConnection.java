@@ -15,7 +15,8 @@ public class DBConnection {
     public DBConnection() {
 
         try {
-            String url = "jdbc:mysql://localhost:3306/pohodnik?useSSL=false";
+            //String url = "jdbc:mysql://localhost:3306/pohodnik?useSSL=false";
+            String url = "jdbc:sqlite:C:\\Users\\gaspe\\IdeaProjects\\database\\db.db";
             String user = "root";
             String password = "example";
 

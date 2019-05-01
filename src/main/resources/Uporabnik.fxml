@@ -39,6 +39,7 @@
                </TableColumn>
            </columns>
        </TableView>
+
     </left>
     <right>
         <VBox alignment="top_right" prefHeight="63.0" prefWidth="240.0" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
@@ -66,6 +67,9 @@
                     <TextField fx:id="textPassword" prefWidth="90" promptText="Username" />
                 </children>
             </HBox>
+
+            <Button fx:id="add" mnemonicParsing="false" onAction="#addAction" text="Add!" />
+
         </VBox>
     </right>
 </BorderPane>
