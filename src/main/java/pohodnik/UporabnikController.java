@@ -14,41 +14,70 @@ public class UporabnikController {
     private String searchString;
 
     @FXML
-    private TableView<Member> tableView;
+    private TableView<Oseba> tableView;
 
     @FXML
     private TextField textSearch;
 
     @FXML
-    private TextField textUsername;
+    private TextField textIme;
 
     @FXML
-    private TextField textEmail;
+    private TextField textPriimek;
 
     @FXML
     private TextField actionTarget;
 
-    public UporabnikController() {
+    @FXML
+    private void initialize() {
+        tableView.getSelectionModel().selectedItemProperty().addListener((observable) -> {
+            textIme.setText(tableView.getSelectionModel().getSelectedItem().getIme());
+            textPriimek.setText(tableView.getSelectionModel().getSelectedItem().getPriimek());
+
+            System.out.println(tableView.getSelectionModel().getSelectedItem().getId());
+
+        });
     }
 
     @FXML
-    protected void handleSubmitButtonAction(ActionEvent event) throws SQLException {
+    private void handleSubmitButtonAction(ActionEvent event) throws SQLException {
         System.out.println(textSearch.getText().trim());
         DBConnection dbConnection = new DBConnection();
-        List<Member> memberList = dbConnection.getMembers(textSearch.getText().trim());
+        List<Oseba> osebaList = dbConnection.getMembers(textSearch.getText().trim());
 
-        ObservableList<Member> data = FXCollections.observableList(memberList);
+        ObservableList<Oseba> data = FXCollections.observableList(osebaList);
         tableView.getItems().setAll(data);
     }
 
     @FXML
     protected void addAction(ActionEvent event) throws SQLException {
         DBConnection dbConnection = new DBConnection();
-        Member member = new Member(textUsername.getText(), textEmail.getText(), "hidden");
-        if (dbConnection.addMember(member)) {
+        Oseba oseba = new Oseba(textIme.getText(), textPriimek.getText());
+        if (dbConnection.addMember(oseba)) {
             actionTarget.setText("Uporabnik uspešno dodan!");
         } else {
             actionTarget.setText("Napaka pri dodajanju!");
+        }
+    }
+
+    @FXML
+    private void handleEditPerson() {
+        int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            tableView.getSelectionModel().getSelectedItem().setIme(textIme.getText());
+            tableView.getSelectionModel().getSelectedItem().setPriimek(textPriimek.getText());
+            DBConnection dbConnection = new DBConnection();
+            dbConnection.updateMember(tableView.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    @FXML
+    private void handleDeletePerson() {
+        int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            DBConnection dbConnection = new DBConnection();
+            dbConnection.deleteMember(tableView.getSelectionModel().getSelectedItem());
+            tableView.getItems().remove(selectedIndex);
         }
     }
 }

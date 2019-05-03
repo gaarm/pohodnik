@@ -28,7 +28,7 @@ public class DBConnection {
     }
 
     public boolean canLogin(String username, String password) {
-        String query = "SELECT * FROM members WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM oseba WHERE ime = ? AND priimek = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setString(1, username);
@@ -36,21 +36,27 @@ public class DBConnection {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                System.out.println(rs.getString("email"));
-                return true;
+                System.out.println(rs.getString("ime"));
+                return false;
             }
 
         } catch (SQLException ex) {
 
             Logger lgr = Logger.getLogger(DBConnection.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+
+            }
         }
         return false;
     }
 
-    public List<Member> getMembers(String searchString) throws SQLException {
-        String query = "SELECT * FROM members WHERE username LIKE ? OR email LIKE ?";
-        List<Member> memberList = new ArrayList<>();
+    public List<Oseba> getMembers(String searchString) throws SQLException {
+        String query = "SELECT * FROM oseba WHERE ime LIKE ? OR priimek LIKE ?";
+        List<Oseba> osebaList = new ArrayList<>();
 
         try {
             ps = conn.prepareStatement(query);
@@ -59,34 +65,95 @@ public class DBConnection {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                memberList.add(new Member(rs.getString("username"),
-                        rs.getString("email"),
-                        rs.getString("password"))
+                osebaList.add(new Oseba(rs.getString("ime"),
+                        rs.getString("priimek"),
+                        rs.getInt("id"))
                 );
             }
         } catch (SQLException ex) {
 
             Logger lgr = Logger.getLogger(DBConnection.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+
+            }
         }
 
-        return memberList;
+        return osebaList;
     }
 
-    public boolean addMember(Member member) {
-        String query = "INSERT INTO members (username, email, password) VALUES (?, ?, ?)";
+    public boolean addMember(Oseba oseba) {
+        String query = "INSERT INTO oseba (ime, priimek) VALUES (?, ?)";
 
         try {
             ps = conn.prepareStatement(query);
-            ps.setString(1, member.getUsername());
-            ps.setString(2, member.getEmail());
-            ps.setString(3, member.getPassword());
+            ps.setString(1, oseba.getIme());
+            ps.setString(2, oseba.getPriimek());
             ps.execute();
             return true;
         } catch (SQLException ex) {
 
             Logger lgr = Logger.getLogger(DBConnection.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+
+            }
+        }
+        return false;
+    }
+
+    public boolean updateMember(Oseba oseba) {
+        System.out.println(oseba.getIme());
+
+        String query = "UPDATE oseba SET ime = ?, priimek = ? WHERE id = ?";
+
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, oseba.getIme());
+            ps.setString(2, oseba.getPriimek());
+            ps.setInt(3, oseba.getId());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(DBConnection.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+
+            }
+        }
+        return false;
+    }
+
+
+    public boolean deleteMember(Oseba oseba) {
+        String query = "DELETE FROM oseba WHERE ime = ? and priimek = ?";
+
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, oseba.getIme());
+            ps.setString(2, oseba.getPriimek());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(DBConnection.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+
+            }
         }
         return false;
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -9,7 +10,7 @@
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <Label text="Išči po uporabniku:">
+                <Label text="Išči:">
                     <padding>
                         <Insets right="10.0" />
                     </padding>
@@ -20,8 +21,7 @@
                     </HBox.margin>
                 </TextField>
                 <Button fx:id="buttonSearch" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Search!" />
-                <TextField fx:id="actionTarget"></TextField>
-
+                <TextField fx:id="actionTarget" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" scaleShape="false" />
             </children>
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -31,45 +31,47 @@
     <left>
        <TableView fx:id="tableView" layoutX="26.0" layoutY="29.0" prefHeight="300.0" prefWidth="360.0">
            <columns>
-               <TableColumn fx:id="username" prefWidth="164.0" text="Username">
-                   <cellValueFactory><PropertyValueFactory property="username" /></cellValueFactory>
+               <TableColumn fx:id="ime" prefWidth="164.0" text="Ime">
+                   <cellValueFactory><PropertyValueFactory property="ime" /></cellValueFactory>
                </TableColumn>
-               <TableColumn fx:id="email" prefWidth="194.0" text="Email">
-                   <cellValueFactory><PropertyValueFactory property="email" /></cellValueFactory>
+               <TableColumn fx:id="priimek" prefWidth="194.0" text="Priimek">
+                   <cellValueFactory><PropertyValueFactory property="priimek" /></cellValueFactory>
                </TableColumn>
            </columns>
        </TableView>
 
     </left>
-    <right>
-        <VBox alignment="top_right" prefHeight="63.0" prefWidth="240.0" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
-           <HBox>
+   <center>
+        <VBox alignment="top_right" prefHeight="369.0" prefWidth="304.0" spacing="10" BorderPane.alignment="CENTER">
+           <children>
+              <HBox>
+                  <children>
+                      <Label text="User name">
+                          <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                      </Label>
+                      <TextField fx:id="textIme" prefHeight="31.0" prefWidth="122.0" promptText="Ime" />
+                  </children>
+              </HBox>
+               <HBox>
                <children>
-                   <Label text="User name">
-                       <padding><Insets right="10.0" /></padding>
-                   </Label>
-                   <TextField fx:id="textUsername" prefWidth="90" promptText="First Name" />
+                  <Label prefHeight="21.0" prefWidth="82.0" text="Email">
+                      <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="textPriimek" prefHeight="31.0" prefWidth="122.0" promptText="Priimek" />
                </children>
-           </HBox>
+               </HBox>
             <HBox>
-            <children>
-               <Label text="Email">
-                   <padding><Insets right="10.0" /></padding>
-               </Label>
-               <TextField fx:id="textEmail" prefWidth="90" promptText="Username" />
-            </children>
+               <children>
+                     <Button fx:id="delete" onAction="#handleDeletePerson" text="Izbriši" />
+                     <Button fx:id="add" mnemonicParsing="false" onAction="#addAction" text="Dodaj novega" />
+                     <Button fx:id="edit" onAction="#handleEditPerson" prefHeight="31.0" prefWidth="61.0" text="Shrani" />
+               </children>
             </HBox>
-            <HBox>
-                <children>
-                    <Label text="pass">
-                        <padding><Insets right="10.0" /></padding>
-                    </Label>
-                    <TextField fx:id="textPassword" prefWidth="90" promptText="Username" />
-                </children>
-            </HBox>
-
-            <Button fx:id="add" mnemonicParsing="false" onAction="#addAction" text="Add!" />
-
+           </children>
         </VBox>
-    </right>
+   </center>
 </BorderPane>
