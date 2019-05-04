@@ -1,77 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pohodnik.UporabnikController">
-    <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-                <Label text="Išči:">
-                    <padding>
-                        <Insets right="10.0" />
-                    </padding>
-                </Label>
-                <TextField fx:id="textSearch">
-                    <HBox.margin>
-                        <Insets right="10.0" />
-                    </HBox.margin>
-                </TextField>
-                <Button fx:id="buttonSearch" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Search!" />
-                <TextField fx:id="actionTarget" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" scaleShape="false" />
-            </children>
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-        </HBox>
-    </top>
-    <left>
-       <TableView fx:id="tableView" layoutX="26.0" layoutY="29.0" prefHeight="300.0" prefWidth="360.0">
-           <columns>
-               <TableColumn fx:id="ime" prefWidth="164.0" text="Ime">
-                   <cellValueFactory><PropertyValueFactory property="ime" /></cellValueFactory>
-               </TableColumn>
-               <TableColumn fx:id="priimek" prefWidth="194.0" text="Priimek">
-                   <cellValueFactory><PropertyValueFactory property="priimek" /></cellValueFactory>
-               </TableColumn>
-           </columns>
-       </TableView>
+<VBox id="vbox" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="pohodnik.UporabnikController" >
 
-    </left>
-   <center>
-        <VBox alignment="top_right" prefHeight="369.0" prefWidth="304.0" spacing="10" BorderPane.alignment="CENTER">
-           <children>
-              <HBox>
-                  <children>
-                      <Label text="User name">
-                          <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                      </Label>
-                      <TextField fx:id="textIme" prefHeight="31.0" prefWidth="122.0" promptText="Ime" />
-                  </children>
-              </HBox>
-               <HBox>
-               <children>
-                  <Label prefHeight="21.0" prefWidth="82.0" text="Email">
-                      <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="textPriimek" prefHeight="31.0" prefWidth="122.0" promptText="Priimek" />
-               </children>
-               </HBox>
-            <HBox>
-               <children>
-                     <Button fx:id="delete" onAction="#handleDeletePerson" text="Izbriši" />
-                     <Button fx:id="add" mnemonicParsing="false" onAction="#addAction" text="Dodaj novega" />
-                     <Button fx:id="edit" onAction="#handleEditPerson" prefHeight="31.0" prefWidth="61.0" text="Shrani" />
-               </children>
+    <MenuBar id="menuBar" focusTraversable="true" >
+        <menus>
+            <Menu text="Oseba">
+
+            </Menu>
+            <Menu text="Pohod">
+
+            </Menu>
+            <Menu text="OsebaPohod">
+
+            </Menu>
+        </menus>
+    </MenuBar>
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+        <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                <children>
+                    <Label text="Išči:">
+                        <padding>
+                            <Insets right="10.0" />
+                        </padding>
+                    </Label>
+                    <TextField fx:id="textSearch">
+                        <HBox.margin>
+                            <Insets right="10.0" />
+                        </HBox.margin>
+                    </TextField>
+                    <Button fx:id="buttonSearch" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Search!" />
+                    <TextField fx:id="actionTarget" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" scaleShape="false" />
+                </children>
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </padding>
             </HBox>
-           </children>
-        </VBox>
-   </center>
-</BorderPane>
+        </top>
+        <left>
+            <TableView fx:id="tableView" layoutX="26.0" layoutY="29.0" prefHeight="300.0" prefWidth="360.0">
+                <columns>
+                    <TableColumn fx:id="ime" prefWidth="164.0" text="Ime">
+                        <cellValueFactory><PropertyValueFactory property="ime" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="priimek" prefWidth="194.0" text="Priimek">
+                        <cellValueFactory><PropertyValueFactory property="priimek" /></cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+
+        </left>
+        <center>
+            <VBox alignment="top_right" prefHeight="369.0" prefWidth="304.0" spacing="10" BorderPane.alignment="CENTER">
+                <children>
+                    <HBox>
+                        <children>
+                            <Label text="User name">
+                                <padding>
+                                    <Insets right="10.0" />
+                                </padding>
+                            </Label>
+                            <TextField fx:id="textIme" prefHeight="31.0" prefWidth="122.0" promptText="Ime" />
+                        </children>
+                    </HBox>
+                    <HBox>
+                        <children>
+                            <Label prefHeight="21.0" prefWidth="82.0" text="Email">
+                                <padding>
+                                    <Insets right="10.0" />
+                                </padding>
+                            </Label>
+                            <TextField fx:id="textPriimek" prefHeight="31.0" prefWidth="122.0" promptText="Priimek" />
+                        </children>
+                    </HBox>
+                    <HBox>
+                        <children>
+                            <Button fx:id="delete" onAction="#handleDeletePerson" text="Izbriši" />
+                            <Button fx:id="add" mnemonicParsing="false" onAction="#addAction" text="Dodaj novega" />
+                            <Button fx:id="edit" onAction="#handleEditPerson" prefHeight="31.0" prefWidth="61.0" text="Shrani" />
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </center>
+    </BorderPane>
+
+</VBox>

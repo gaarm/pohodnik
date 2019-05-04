@@ -11,8 +11,6 @@ import java.util.List;
 
 public class UporabnikController {
 
-    private String searchString;
-
     @FXML
     private TableView<Oseba> tableView;
 
@@ -55,6 +53,9 @@ public class UporabnikController {
         Oseba oseba = new Oseba(textIme.getText(), textPriimek.getText());
         if (dbConnection.addMember(oseba)) {
             actionTarget.setText("Uporabnik uspešno dodan!");
+            textIme.setText("");
+            textPriimek.setText("");
+
         } else {
             actionTarget.setText("Napaka pri dodajanju!");
         }
