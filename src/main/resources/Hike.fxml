@@ -5,17 +5,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="pohodnik.UporabnikController" >
+<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="pohodnik.controller.HikeController" >
     <MenuBar id="menuBar" focusTraversable="true" >
         <menus>
             <Menu text="Meni">
-                <MenuItem fx:id="oseba" mnemonicParsing="false" onAction="#clickMenuItemOseba" text="Oseba" />
-                <MenuItem fx:id="pohod" mnemonicParsing="false" onAction="#clickMenuItemPohod" text="Pohod" />
+                <MenuItem fx:id="oseba" mnemonicParsing="false" text="Oseba" />
+                <MenuItem fx:id="pohod" mnemonicParsing="false" text="Pohod" />
             </Menu>
         </menus>
     </MenuBar>
-
-    <BorderPane fx:id="borderPaneOseba" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
         <top>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                 <children>
@@ -29,7 +28,7 @@
                             <Insets right="10.0" />
                         </HBox.margin>
                     </TextField>
-                    <Button fx:id="buttonSearch" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Search!" />
+                    <Button fx:id="buttonSearch" mnemonicParsing="false" onAction="#handleSearchAction" text="Search!" />
                     <TextField fx:id="actionTarget" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" scaleShape="false" />
                 </children>
                 <padding>
@@ -40,44 +39,30 @@
         <left>
             <TableView fx:id="tableView" layoutX="26.0" layoutY="29.0" prefHeight="300.0" prefWidth="360.0">
                 <columns>
-                    <TableColumn fx:id="ime" prefWidth="164.0" text="Ime">
-                        <cellValueFactory><PropertyValueFactory property="ime" /></cellValueFactory>
-                    </TableColumn>
-                    <TableColumn fx:id="priimek" prefWidth="194.0" text="Priimek">
-                        <cellValueFactory><PropertyValueFactory property="priimek" /></cellValueFactory>
+                    <TableColumn fx:id="naziv" prefWidth="164.0" text="Naziv">
+                        <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
                     </TableColumn>
                 </columns>
             </TableView>
-
         </left>
         <center>
             <VBox alignment="top_right" prefHeight="369.0" prefWidth="304.0" spacing="10" BorderPane.alignment="CENTER">
                 <children>
                     <HBox>
                         <children>
-                            <Label text="User name">
+                            <Label text="Naziv">
                                 <padding>
                                     <Insets right="10.0" />
                                 </padding>
                             </Label>
-                            <TextField fx:id="textIme" prefHeight="31.0" prefWidth="122.0" promptText="Ime" />
+                            <TextField fx:id="textNaziv" prefHeight="31.0" prefWidth="122.0" promptText="Naziv" />
                         </children>
                     </HBox>
                     <HBox>
                         <children>
-                            <Label prefHeight="21.0" prefWidth="82.0" text="Email">
-                                <padding>
-                                    <Insets right="10.0" />
-                                </padding>
-                            </Label>
-                            <TextField fx:id="textPriimek" prefHeight="31.0" prefWidth="122.0" promptText="Priimek" />
-                        </children>
-                    </HBox>
-                    <HBox>
-                        <children>
-                            <Button fx:id="delete" onAction="#handleDeletePerson" text="Izbriši" />
-                            <Button fx:id="add" mnemonicParsing="false" onAction="#addAction" text="Dodaj novega" />
-                            <Button fx:id="edit" onAction="#handleEditPerson" prefHeight="31.0" prefWidth="61.0" text="Shrani" />
+                            <Button fx:id="delete" onAction="#handleDeleteAction" text="Izbriši" />
+                            <Button fx:id="add" mnemonicParsing="false" onAction="#handleAddAction" text="Dodaj novega" />
+                            <Button fx:id="edit" onAction="#handleEditAction" prefHeight="31.0" prefWidth="61.0" text="Shrani" />
                         </children>
                     </HBox>
                 </children>

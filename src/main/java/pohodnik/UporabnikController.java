@@ -4,8 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -25,6 +32,11 @@ public class UporabnikController {
 
     @FXML
     private TextField actionTarget;
+
+    @FXML
+    private BorderPane borderPaneOseba;
+    @FXML
+    private BorderPane borderPanePohod;
 
     @FXML
     private void initialize() {
@@ -53,6 +65,7 @@ public class UporabnikController {
         Oseba oseba = new Oseba(textIme.getText(), textPriimek.getText());
         if (dbConnection.addMember(oseba)) {
             actionTarget.setText("Uporabnik uspešno dodan!");
+            tableView.getItems().add(oseba);
             textIme.setText("");
             textPriimek.setText("");
 
@@ -80,5 +93,25 @@ public class UporabnikController {
             dbConnection.deleteMember(tableView.getSelectionModel().getSelectedItem());
             tableView.getItems().remove(selectedIndex);
         }
+    }
+
+    @FXML
+    public void clickMenuItemOseba(ActionEvent event) {
+        System.out.println("x");
+        borderPaneOseba.setVisible(false);
+    }
+
+    @FXML
+    public void clickMenuItemPohod(ActionEvent event) throws IOException {
+        System.out.println("x");
+        Stage stage = (Stage) textIme.getScene().getWindow();
+        stage.close();
+
+        Stage stagePohod = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/Hike.fxml"));
+        stage.setScene(new Scene(root));
+
+        //Fill stage with content
+        stage.show();
     }
 }
