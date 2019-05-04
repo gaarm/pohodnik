@@ -5,11 +5,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="pohodnik.controller.HikeController" >
+<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="myapp.controller.HikeController" >
     <MenuBar id="menuBar" focusTraversable="true" >
         <menus>
             <Menu text="Meni">
-                <MenuItem fx:id="oseba" mnemonicParsing="false" text="Oseba" />
+                <MenuItem fx:id="person" mnemonicParsing="false" text="Oseba" />
                 <MenuItem fx:id="pohod" mnemonicParsing="false" text="Pohod" />
             </Menu>
         </menus>

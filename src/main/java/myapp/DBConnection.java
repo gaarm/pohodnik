@@ -1,6 +1,7 @@
-package pohodnik;
+package myapp;
 
-import pohodnik.model.Hike;
+import myapp.model.Hike;
+import myapp.model.Person;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class DBConnection {
     public DBConnection() {
 
         try {
-            //String url = "jdbc:mysql://localhost:3306/pohodnik?useSSL=false";
+            //String url = "jdbc:mysql://localhost:3306/myapp?useSSL=false";
             String url = "jdbc:sqlite:C:\\Users\\gaspe\\IdeaProjects\\db-sqlite\\database.db";
             String user = "root";
             String password = "example";
@@ -56,9 +57,9 @@ public class DBConnection {
         return false;
     }
 
-    public List<Oseba> getMembers(String searchString) throws SQLException {
+    public List<Person> getPersons(String searchString) throws SQLException {
         String query = "SELECT * FROM oseba WHERE ime LIKE ? OR priimek LIKE ?";
-        List<Oseba> osebaList = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
 
         try {
             ps = conn.prepareStatement(query);
@@ -67,9 +68,9 @@ public class DBConnection {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                osebaList.add(new Oseba(rs.getString("ime"),
-                        rs.getString("priimek"),
-                        rs.getInt("id"))
+                personList.add(new Person(rs.getInt("id"),
+                        rs.getString("ime"),
+                        rs.getString("priimek"))
                 );
             }
         } catch (SQLException ex) {
@@ -84,16 +85,16 @@ public class DBConnection {
             }
         }
 
-        return osebaList;
+        return personList;
     }
 
-    public boolean addMember(Oseba oseba) {
+    public boolean addPerson(Person person) {
         String query = "INSERT INTO oseba (ime, priimek) VALUES (?, ?)";
 
         try {
             ps = conn.prepareStatement(query);
-            ps.setString(1, oseba.getIme());
-            ps.setString(2, oseba.getPriimek());
+            ps.setString(1, person.getName());
+            ps.setString(2, person.getSurname());
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -110,16 +111,16 @@ public class DBConnection {
         return false;
     }
 
-    public boolean updateMember(Oseba oseba) {
-        System.out.println(oseba.getIme());
+    public boolean updatePerson(Person person) {
+        System.out.println(person.getName());
 
         String query = "UPDATE oseba SET ime = ?, priimek = ? WHERE id = ?";
 
         try {
             ps = conn.prepareStatement(query);
-            ps.setString(1, oseba.getIme());
-            ps.setString(2, oseba.getPriimek());
-            ps.setInt(3, oseba.getId());
+            ps.setString(1, person.getName());
+            ps.setString(2, person.getSurname());
+            ps.setInt(3, person.getId());
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -137,13 +138,12 @@ public class DBConnection {
     }
 
 
-    public boolean deleteMember(Oseba oseba) {
-        String query = "DELETE FROM oseba WHERE ime = ? and priimek = ?";
+    public boolean deletePerson(Person person) {
+        String query = "DELETE FROM oseba WHERE id = ?";
 
         try {
             ps = conn.prepareStatement(query);
-            ps.setString(1, oseba.getIme());
-            ps.setString(2, oseba.getPriimek());
+            ps.setInt(1, person.getId());
             ps.execute();
             return true;
         } catch (SQLException ex) {

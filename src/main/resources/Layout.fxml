@@ -4,7 +4,7 @@
 <AnchorPane
         xmlns:fx="http://javafx.com/fxml"
         xmlns="http://javafx.com/javafx"
-        fx:controller="pohodnik.UporabnikController">
+        fx:controller="myapp.controller.PersonController">
   <children>
 
     <HBox id="HBox" alignment="CENTER" spacing="5.0">

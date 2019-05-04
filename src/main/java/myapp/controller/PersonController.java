@@ -1,4 +1,4 @@
-package pohodnik;
+package myapp.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,15 +11,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import myapp.DBConnection;
+import myapp.model.Person;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UporabnikController {
+public class PersonController {
 
     @FXML
-    private TableView<Oseba> tableView;
+    private TableView<Person> tableView;
 
     @FXML
     private TextField textSearch;
@@ -41,8 +43,8 @@ public class UporabnikController {
     @FXML
     private void initialize() {
         tableView.getSelectionModel().selectedItemProperty().addListener((observable) -> {
-            textIme.setText(tableView.getSelectionModel().getSelectedItem().getIme());
-            textPriimek.setText(tableView.getSelectionModel().getSelectedItem().getPriimek());
+            textIme.setText(tableView.getSelectionModel().getSelectedItem().getName());
+            textPriimek.setText(tableView.getSelectionModel().getSelectedItem().getSurname());
 
             System.out.println(tableView.getSelectionModel().getSelectedItem().getId());
 
@@ -50,22 +52,22 @@ public class UporabnikController {
     }
 
     @FXML
-    private void handleSubmitButtonAction(ActionEvent event) throws SQLException {
+    private void handleSearchAction(ActionEvent event) throws SQLException {
         System.out.println(textSearch.getText().trim());
         DBConnection dbConnection = new DBConnection();
-        List<Oseba> osebaList = dbConnection.getMembers(textSearch.getText().trim());
+        List<Person> personList = dbConnection.getPersons(textSearch.getText().trim());
 
-        ObservableList<Oseba> data = FXCollections.observableList(osebaList);
+        ObservableList<Person> data = FXCollections.observableList(personList);
         tableView.getItems().setAll(data);
     }
 
     @FXML
-    protected void addAction(ActionEvent event) throws SQLException {
+    protected void handleAddAction(ActionEvent event) throws SQLException {
         DBConnection dbConnection = new DBConnection();
-        Oseba oseba = new Oseba(textIme.getText(), textPriimek.getText());
-        if (dbConnection.addMember(oseba)) {
+        Person person = new Person(textIme.getText(), textPriimek.getText());
+        if (dbConnection.addPerson(person)) {
             actionTarget.setText("Uporabnik uspešno dodan!");
-            tableView.getItems().add(oseba);
+            tableView.getItems().add(person);
             textIme.setText("");
             textPriimek.setText("");
 
@@ -75,22 +77,22 @@ public class UporabnikController {
     }
 
     @FXML
-    private void handleEditPerson() {
+    private void handleEditAction() {
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            tableView.getSelectionModel().getSelectedItem().setIme(textIme.getText());
-            tableView.getSelectionModel().getSelectedItem().setPriimek(textPriimek.getText());
+            tableView.getSelectionModel().getSelectedItem().setName(textIme.getText());
+            tableView.getSelectionModel().getSelectedItem().setSurname(textPriimek.getText());
             DBConnection dbConnection = new DBConnection();
-            dbConnection.updateMember(tableView.getSelectionModel().getSelectedItem());
+            dbConnection.updatePerson(tableView.getSelectionModel().getSelectedItem());
         }
     }
 
     @FXML
-    private void handleDeletePerson() {
+    private void handleDeleteAction() {
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             DBConnection dbConnection = new DBConnection();
-            dbConnection.deleteMember(tableView.getSelectionModel().getSelectedItem());
+            dbConnection.deletePerson(tableView.getSelectionModel().getSelectedItem());
             tableView.getItems().remove(selectedIndex);
         }
     }

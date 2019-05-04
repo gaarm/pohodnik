@@ -1,4 +1,4 @@
-package pohodnik.model;
+package myapp.model;
 
 public class Hike {
     private int id = 0;

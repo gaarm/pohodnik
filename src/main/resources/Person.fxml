@@ -5,11 +5,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="pohodnik.UporabnikController" >
+<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="myapp.controller.PersonController" >
     <MenuBar id="menuBar" focusTraversable="true" >
         <menus>
             <Menu text="Meni">
-                <MenuItem fx:id="oseba" mnemonicParsing="false" onAction="#clickMenuItemOseba" text="Oseba" />
+                <MenuItem fx:id="person" mnemonicParsing="false" onAction="#clickMenuItemOseba" text="Oseba" />
                 <MenuItem fx:id="pohod" mnemonicParsing="false" onAction="#clickMenuItemPohod" text="Pohod" />
             </Menu>
         </menus>
@@ -29,7 +29,7 @@
                             <Insets right="10.0" />
                         </HBox.margin>
                     </TextField>
-                    <Button fx:id="buttonSearch" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Search!" />
+                    <Button fx:id="buttonSearch" mnemonicParsing="false" onAction="#handleSearchAction" text="Search!" />
                     <TextField fx:id="actionTarget" cacheShape="false" centerShape="false" editable="false" focusTraversable="false" scaleShape="false" />
                 </children>
                 <padding>
@@ -40,11 +40,11 @@
         <left>
             <TableView fx:id="tableView" layoutX="26.0" layoutY="29.0" prefHeight="300.0" prefWidth="360.0">
                 <columns>
-                    <TableColumn fx:id="ime" prefWidth="164.0" text="Ime">
-                        <cellValueFactory><PropertyValueFactory property="ime" /></cellValueFactory>
+                    <TableColumn fx:id="name" prefWidth="164.0" text="Ime">
+                        <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="priimek" prefWidth="194.0" text="Priimek">
-                        <cellValueFactory><PropertyValueFactory property="priimek" /></cellValueFactory>
+                    <TableColumn fx:id="surname" prefWidth="194.0" text="Priimek">
+                        <cellValueFactory><PropertyValueFactory property="surname" /></cellValueFactory>
                     </TableColumn>
                 </columns>
             </TableView>
@@ -75,9 +75,9 @@
                     </HBox>
                     <HBox>
                         <children>
-                            <Button fx:id="delete" onAction="#handleDeletePerson" text="Izbriši" />
-                            <Button fx:id="add" mnemonicParsing="false" onAction="#addAction" text="Dodaj novega" />
-                            <Button fx:id="edit" onAction="#handleEditPerson" prefHeight="31.0" prefWidth="61.0" text="Shrani" />
+                            <Button fx:id="delete" onAction="#handleDeleteAction" text="Izbriši" />
+                            <Button fx:id="add" mnemonicParsing="false" onAction="#handleAddAction" text="Dodaj novega" />
+                            <Button fx:id="edit" onAction="#handleEditAction" prefHeight="31.0" prefWidth="61.0" text="Shrani" />
                         </children>
                     </HBox>
                 </children>

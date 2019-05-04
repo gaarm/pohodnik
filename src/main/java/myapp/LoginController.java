@@ -1,4 +1,4 @@
-package pohodnik;
+package myapp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +25,7 @@ public class LoginController {
 
 
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/Uporabnik.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Person.fxml"));
             stage.setScene(new Scene(root));
 
             //Fill stage with content

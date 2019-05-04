@@ -1,9 +1,9 @@
 -- database script for sqlite
-CREATE TABLE oseba (
+CREATE TABLE person (
  id INTEGER PRIMARY KEY,
- ime TEXT NOT NULL,
- priimek TEXT NOT NULL,
- UNIQUE (ime, priimek)
+ name TEXT NOT NULL,
+ surname TEXT NOT NULL,
+ UNIQUE (name, surname)
 );
 
 CREATE TABLE pohod (

@@ -1,4 +1,4 @@
-package pohodnik.controller;
+package myapp.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,8 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import pohodnik.DBConnection;
-import pohodnik.model.Hike;
+import myapp.DBConnection;
+import myapp.model.Hike;
 
 import java.io.IOException;
 import java.sql.SQLException;
