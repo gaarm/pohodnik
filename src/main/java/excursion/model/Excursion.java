@@ -1,15 +1,15 @@
-package myapp.model;
+package excursion.model;
 
-public class Hike {
+public class Excursion {
     private int id = 0;
     private String name;
 
-    public Hike(int id, String name) {
+    public Excursion(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Hike(String name) {
+    public Excursion(String name) {
         this.name = name;
     }
 

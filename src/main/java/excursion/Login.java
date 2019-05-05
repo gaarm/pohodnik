@@ -1,4 +1,4 @@
-package myapp;
+package excursion;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

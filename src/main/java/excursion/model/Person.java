@@ -1,4 +1,4 @@
-package myapp.model;
+package excursion.model;
 
 public class Person {
     private int id = 0;

@@ -1,5 +1,5 @@
-# Aplikacija myapp
-Aplikacija "myapp" je sistem za vodenje evidence pohodnikov ter njihovega udeleževanja na pohodih.
+# Aplikacija excursion
+Aplikacija "excursion" je sistem za vodenje evidence pohodnikov ter njihovega udeleževanja na pohodih.
 
 ## Tehnologija
 Aplikacija je spisana v programskem jeziku JAVA (ver 11). Gre za desktop aplikacijo, kjer je uporabljena knjižnica javafx.

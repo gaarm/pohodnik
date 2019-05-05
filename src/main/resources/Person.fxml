@@ -5,12 +5,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="myapp.controller.PersonController" >
+<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="excursion.controller.PersonController" >
     <MenuBar id="menuBar" focusTraversable="true" >
         <menus>
             <Menu text="Meni">
-                <MenuItem fx:id="person" mnemonicParsing="false" onAction="#clickMenuItemOseba" text="Oseba" />
-                <MenuItem fx:id="pohod" mnemonicParsing="false" onAction="#clickMenuItemPohod" text="Pohod" />
+                <MenuItem fx:id="person" mnemonicParsing="false" text="Oseba" />
+                <MenuItem fx:id="excursion" mnemonicParsing="false" onAction="#clickMenuItemHike" text="Pohod" />
             </Menu>
         </menus>
     </MenuBar>
@@ -60,7 +60,7 @@
                                     <Insets right="10.0" />
                                 </padding>
                             </Label>
-                            <TextField fx:id="textIme" prefHeight="31.0" prefWidth="122.0" promptText="Ime" />
+                            <TextField fx:id="textName" prefHeight="31.0" prefWidth="122.0" promptText="Ime" />
                         </children>
                     </HBox>
                     <HBox>
@@ -70,7 +70,7 @@
                                     <Insets right="10.0" />
                                 </padding>
                             </Label>
-                            <TextField fx:id="textPriimek" prefHeight="31.0" prefWidth="122.0" promptText="Priimek" />
+                            <TextField fx:id="textSurname" prefHeight="31.0" prefWidth="122.0" promptText="Priimek" />
                         </children>
                     </HBox>
                     <HBox>

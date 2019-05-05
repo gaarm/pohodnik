@@ -1,7 +1,7 @@
-package myapp;
+package excursion;
 
-import myapp.model.Hike;
-import myapp.model.Person;
+import excursion.model.Excursion;
+import excursion.model.Person;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class DBConnection {
     public DBConnection() {
 
         try {
-            //String url = "jdbc:mysql://localhost:3306/myapp?useSSL=false";
+            //String url = "jdbc:mysql://localhost:3306/excursion?useSSL=false";
             String url = "jdbc:sqlite:C:\\Users\\gaspe\\IdeaProjects\\db-sqlite\\database.db";
             String user = "root";
             String password = "example";
@@ -160,9 +160,9 @@ public class DBConnection {
         return false;
     }
 
-    public List<Hike> getHikes(String searchString) throws SQLException {
+    public List<Excursion> getHikes(String searchString) throws SQLException {
         String query = "SELECT * FROM pohod WHERE naziv LIKE ?";
-        List<Hike> hikeList = new ArrayList<>();
+        List<Excursion> excursionList = new ArrayList<>();
 
         try {
             ps = conn.prepareStatement(query);
@@ -170,7 +170,7 @@ public class DBConnection {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                hikeList.add(new Hike(rs.getInt("id"),
+                excursionList.add(new Excursion(rs.getInt("id"),
                         rs.getString("naziv"))
                 );
             }
@@ -186,15 +186,15 @@ public class DBConnection {
             }
         }
 
-        return hikeList;
+        return excursionList;
     }
 
-    public boolean addHike(Hike hike) {
+    public boolean addHike(Excursion excursion) {
         String query = "INSERT INTO pohod (naziv) VALUES (?)";
 
         try {
             ps = conn.prepareStatement(query);
-            ps.setString(1, hike.getName());
+            ps.setString(1, excursion.getName());
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -211,14 +211,14 @@ public class DBConnection {
         return false;
     }
 
-    public boolean updateHike(Hike hike) {
+    public boolean updateHike(Excursion excursion) {
 
         String query = "UPDATE pohod SET naziv = ? WHERE id = ?";
 
         try {
             ps = conn.prepareStatement(query);
-            ps.setString(1, hike.getName());
-            ps.setInt(2, hike.getId());
+            ps.setString(1, excursion.getName());
+            ps.setInt(2, excursion.getId());
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -236,12 +236,12 @@ public class DBConnection {
     }
 
 
-    public boolean deleteHike(Hike hike) {
+    public boolean deleteHike(Excursion excursion) {
         String query = "DELETE FROM pohod WHERE id = ?";
 
         try {
             ps = conn.prepareStatement(query);
-            ps.setInt(1, hike.getId());
+            ps.setInt(1, excursion.getId());
             ps.execute();
             return true;
         } catch (SQLException ex) {

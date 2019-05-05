@@ -5,12 +5,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="myapp.controller.HikeController" >
+<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="excursion.controller.ExcursionController" >
     <MenuBar id="menuBar" focusTraversable="true" >
         <menus>
             <Menu text="Meni">
-                <MenuItem fx:id="person" mnemonicParsing="false" text="Oseba" />
-                <MenuItem fx:id="pohod" mnemonicParsing="false" text="Pohod" />
+                <MenuItem fx:id="person" mnemonicParsing="false"  onAction="#clickMenuItemPerson" text="Oseba" />
+                <MenuItem fx:id="excursion" mnemonicParsing="false" text="Pohod" />
             </Menu>
         </menus>
     </MenuBar>
@@ -55,7 +55,7 @@
                                     <Insets right="10.0" />
                                 </padding>
                             </Label>
-                            <TextField fx:id="textNaziv" prefHeight="31.0" prefWidth="122.0" promptText="Naziv" />
+                            <TextField fx:id="textName" prefHeight="31.0" prefWidth="122.0" promptText="Naziv" />
                         </children>
                     </HBox>
                     <HBox>

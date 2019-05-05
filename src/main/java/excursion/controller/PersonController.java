@@ -1,4 +1,4 @@
-package myapp.controller;
+package excursion.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,8 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import myapp.DBConnection;
-import myapp.model.Person;
+import excursion.DBConnection;
+import excursion.model.Person;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,27 +27,19 @@ public class PersonController {
     private TextField textSearch;
 
     @FXML
-    private TextField textIme;
+    private TextField textName;
 
     @FXML
-    private TextField textPriimek;
+    private TextField textSurname;
 
     @FXML
     private TextField actionTarget;
 
     @FXML
-    private BorderPane borderPaneOseba;
-    @FXML
-    private BorderPane borderPanePohod;
-
-    @FXML
     private void initialize() {
         tableView.getSelectionModel().selectedItemProperty().addListener((observable) -> {
-            textIme.setText(tableView.getSelectionModel().getSelectedItem().getName());
-            textPriimek.setText(tableView.getSelectionModel().getSelectedItem().getSurname());
-
-            System.out.println(tableView.getSelectionModel().getSelectedItem().getId());
-
+            textName.setText(tableView.getSelectionModel().getSelectedItem().getName());
+            textSurname.setText(tableView.getSelectionModel().getSelectedItem().getSurname());
         });
     }
 
@@ -64,12 +56,12 @@ public class PersonController {
     @FXML
     protected void handleAddAction(ActionEvent event) throws SQLException {
         DBConnection dbConnection = new DBConnection();
-        Person person = new Person(textIme.getText(), textPriimek.getText());
+        Person person = new Person(textName.getText(), textSurname.getText());
         if (dbConnection.addPerson(person)) {
             actionTarget.setText("Uporabnik uspešno dodan!");
             tableView.getItems().add(person);
-            textIme.setText("");
-            textPriimek.setText("");
+            textName.setText("");
+            textSurname.setText("");
 
         } else {
             actionTarget.setText("Napaka pri dodajanju!");
@@ -80,8 +72,8 @@ public class PersonController {
     private void handleEditAction() {
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            tableView.getSelectionModel().getSelectedItem().setName(textIme.getText());
-            tableView.getSelectionModel().getSelectedItem().setSurname(textPriimek.getText());
+            tableView.getSelectionModel().getSelectedItem().setName(textName.getText());
+            tableView.getSelectionModel().getSelectedItem().setSurname(textSurname.getText());
             DBConnection dbConnection = new DBConnection();
             dbConnection.updatePerson(tableView.getSelectionModel().getSelectedItem());
         }
@@ -98,19 +90,12 @@ public class PersonController {
     }
 
     @FXML
-    public void clickMenuItemOseba(ActionEvent event) {
-        System.out.println("x");
-        borderPaneOseba.setVisible(false);
-    }
-
-    @FXML
-    public void clickMenuItemPohod(ActionEvent event) throws IOException {
-        System.out.println("x");
-        Stage stage = (Stage) textIme.getScene().getWindow();
+    public void clickMenuItemHike(ActionEvent event) throws IOException {
+        Stage stage = (Stage) textName.getScene().getWindow();
         stage.close();
 
-        Stage stagePohod = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/Hike.fxml"));
+        Stage stageExcursion = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/Excursion.fxml"));
         stage.setScene(new Scene(root));
 
         //Fill stage with content
