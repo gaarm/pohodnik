@@ -35,7 +35,13 @@ public class PersonController {
     private TextField actionTarget;
 
     @FXML
-    private void initialize() {
+    private void initialize() throws SQLException {
+        DBConnection dbConnection = new DBConnection();
+        List<Person> personList = dbConnection.getPersons("");
+
+        ObservableList<Person> data = FXCollections.observableList(personList);
+        tableView.getItems().setAll(data);
+
         tableView.getSelectionModel().selectedItemProperty().addListener((observable) -> {
             textFirstname.setText(tableView.getSelectionModel().getSelectedItem().getName());
             textSurname.setText(tableView.getSelectionModel().getSelectedItem().getSurname());

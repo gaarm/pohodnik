@@ -131,7 +131,7 @@ public class DBConnection {
         return false;
     }
 
-    public List<Excursion> getHikes(String searchString) throws SQLException {
+    public List<Excursion> getExcursions(String searchString) throws SQLException {
         String query = "SELECT * FROM pohod WHERE naziv LIKE ?";
         List<Excursion> excursionList = new ArrayList<>();
 
@@ -160,7 +160,7 @@ public class DBConnection {
         return excursionList;
     }
 
-    public boolean addHike(Excursion excursion) {
+    public boolean addExcursion(Excursion excursion) {
         String query = "INSERT INTO pohod (naziv) VALUES (?)";
 
         try {
@@ -182,7 +182,7 @@ public class DBConnection {
         return false;
     }
 
-    public boolean updateHike(Excursion excursion) {
+    public boolean updateExcursion(Excursion excursion) {
 
         String query = "UPDATE pohod SET naziv = ? WHERE id = ?";
 
@@ -207,7 +207,7 @@ public class DBConnection {
     }
 
 
-    public boolean deleteHike(Excursion excursion) {
+    public boolean deleteExcursion(Excursion excursion) {
         String query = "DELETE FROM pohod WHERE id = ?";
 
         try {

@@ -32,7 +32,13 @@ public class ExcursionController {
     private TextField actionTarget;
 
     @FXML
-    private void initialize() {
+    private void initialize() throws SQLException {
+        DBConnection dbConnection = new DBConnection();
+        List<Excursion> excursionList = dbConnection.getExcursions(textSearch.getText().trim());
+
+        ObservableList<Excursion> data = FXCollections.observableList(excursionList);
+        tableView.getItems().setAll(data);
+
         tableView.getSelectionModel().selectedItemProperty().addListener((observable) -> {
             textName.setText(tableView.getSelectionModel().getSelectedItem().getName());
         });
@@ -42,7 +48,7 @@ public class ExcursionController {
     private void handleSearchAction(ActionEvent event) throws SQLException {
         System.out.println(textSearch.getText().trim());
         DBConnection dbConnection = new DBConnection();
-        List<Excursion> excursionList = dbConnection.getHikes(textSearch.getText().trim());
+        List<Excursion> excursionList = dbConnection.getExcursions(textSearch.getText().trim());
 
         ObservableList<Excursion> data = FXCollections.observableList(excursionList);
         tableView.getItems().setAll(data);
@@ -52,7 +58,7 @@ public class ExcursionController {
     protected void handleAddAction(ActionEvent event) throws SQLException {
         DBConnection dbConnection = new DBConnection();
         Excursion excursion = new Excursion(textName.getText());
-        if (dbConnection.addHike(excursion)) {
+        if (dbConnection.addExcursion(excursion)) {
             actionTarget.setText("Pohod uspešno dodan!");
             tableView.getItems().add(excursion);
             textName.setText("");
@@ -67,7 +73,7 @@ public class ExcursionController {
         if (selectedIndex >= 0) {
             tableView.getSelectionModel().getSelectedItem().setName(textName.getText());
             DBConnection dbConnection = new DBConnection();
-            dbConnection.updateHike(tableView.getSelectionModel().getSelectedItem());
+            dbConnection.updateExcursion(tableView.getSelectionModel().getSelectedItem());
         }
     }
 
@@ -76,7 +82,7 @@ public class ExcursionController {
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             DBConnection dbConnection = new DBConnection();
-            dbConnection.deleteHike(tableView.getSelectionModel().getSelectedItem());
+            dbConnection.deleteExcursion(tableView.getSelectionModel().getSelectedItem());
             tableView.getItems().remove(selectedIndex);
         }
     }
