@@ -1,5 +1,6 @@
 package excursion.controller;
 
+import excursion.Bootstrap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -94,7 +95,7 @@ public class PersonController {
 
         Parent root = FXMLLoader.load(getClass().getResource("/Excursion.fxml"));
         stage.setScene(new Scene(root));
-        stage.setTitle("Aplikacija pohodnik");
+        stage.setTitle(Bootstrap.APP_TITLE);
         stage.setResizable(false);
         stage.show();
     }

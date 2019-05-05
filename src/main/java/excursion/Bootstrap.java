@@ -8,11 +8,13 @@ import javafx.stage.Stage;
 
 public class Bootstrap extends Application {
 
+    public static final String APP_TITLE = "Aplikacija pohodnik";
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/Person.fxml"));
 
-        stage.setTitle("Aplikacija pohodnik");
+        stage.setTitle(Bootstrap.APP_TITLE);
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.show();

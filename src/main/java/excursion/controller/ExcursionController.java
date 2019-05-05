@@ -1,5 +1,6 @@
 package excursion.controller;
 
+import excursion.Bootstrap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import excursion.DBConnection;
 import excursion.model.Excursion;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -60,6 +60,7 @@ public class ExcursionController {
             actionTarget.setText("Napaka pri dodajanju!");
         }
     }
+
     @FXML
     private void handleEditAction() {
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
@@ -87,7 +88,7 @@ public class ExcursionController {
 
         Parent root = FXMLLoader.load(getClass().getResource("/Person.fxml"));
         stage.setScene(new Scene(root));
-        stage.setTitle("Aplikacija pohodnik");
+        stage.setTitle(Bootstrap.APP_TITLE);
         stage.setResizable(false);
         stage.show();
     }
