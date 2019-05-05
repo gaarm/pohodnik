@@ -2,7 +2,6 @@ package excursion;
 
 import excursion.model.Excursion;
 import excursion.model.Person;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,33 +27,6 @@ public class DBConnection {
             Logger lgr = Logger.getLogger(DBConnection.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
-    }
-
-    public boolean canLogin(String username, String password) {
-        String query = "SELECT * FROM oseba WHERE ime = ? AND priimek = ?";
-        try {
-            ps = conn.prepareStatement(query);
-            ps.setString(1, username);
-            ps.setString(2, password);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                System.out.println(rs.getString("ime"));
-                return false;
-            }
-
-        } catch (SQLException ex) {
-
-            Logger lgr = Logger.getLogger(DBConnection.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        } finally {
-            try {
-                rs.close();
-            } catch (Exception e) {
-
-            }
-        }
-        return false;
     }
 
     public List<Person> getPersons(String searchString) throws SQLException {
@@ -136,7 +108,6 @@ public class DBConnection {
         }
         return false;
     }
-
 
     public boolean deletePerson(Person person) {
         String query = "DELETE FROM oseba WHERE id = ?";

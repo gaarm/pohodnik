@@ -9,11 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import excursion.DBConnection;
 import excursion.model.Person;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -27,7 +25,7 @@ public class PersonController {
     private TextField textSearch;
 
     @FXML
-    private TextField textName;
+    private TextField textFirstname;
 
     @FXML
     private TextField textSurname;
@@ -38,7 +36,7 @@ public class PersonController {
     @FXML
     private void initialize() {
         tableView.getSelectionModel().selectedItemProperty().addListener((observable) -> {
-            textName.setText(tableView.getSelectionModel().getSelectedItem().getName());
+            textFirstname.setText(tableView.getSelectionModel().getSelectedItem().getName());
             textSurname.setText(tableView.getSelectionModel().getSelectedItem().getSurname());
         });
     }
@@ -56,11 +54,11 @@ public class PersonController {
     @FXML
     protected void handleAddAction(ActionEvent event) throws SQLException {
         DBConnection dbConnection = new DBConnection();
-        Person person = new Person(textName.getText(), textSurname.getText());
+        Person person = new Person(textFirstname.getText(), textSurname.getText());
         if (dbConnection.addPerson(person)) {
             actionTarget.setText("Uporabnik uspešno dodan!");
             tableView.getItems().add(person);
-            textName.setText("");
+            textFirstname.setText("");
             textSurname.setText("");
 
         } else {
@@ -72,7 +70,7 @@ public class PersonController {
     private void handleEditAction() {
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            tableView.getSelectionModel().getSelectedItem().setName(textName.getText());
+            tableView.getSelectionModel().getSelectedItem().setName(textFirstname.getText());
             tableView.getSelectionModel().getSelectedItem().setSurname(textSurname.getText());
             DBConnection dbConnection = new DBConnection();
             dbConnection.updatePerson(tableView.getSelectionModel().getSelectedItem());
@@ -91,14 +89,13 @@ public class PersonController {
 
     @FXML
     public void clickMenuItemHike(ActionEvent event) throws IOException {
-        Stage stage = (Stage) textName.getScene().getWindow();
+        Stage stage = (Stage) textFirstname.getScene().getWindow();
         stage.close();
 
-        Stage stageExcursion = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/Excursion.fxml"));
         stage.setScene(new Scene(root));
-
-        //Fill stage with content
+        stage.setTitle("Aplikacija pohodnik");
+        stage.setResizable(false);
         stage.show();
     }
 }

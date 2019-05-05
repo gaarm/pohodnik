@@ -6,19 +6,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Login extends Application {
+public class Bootstrap extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Person.fxml"));
 
-        stage.setTitle("Prijavno okno");
-        stage.setScene(new Scene(root, 400, 350));
+        stage.setTitle("Aplikacija pohodnik");
+        stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.show();
     }
 
     public static void main(String[] args) {
-        Application.launch(Login.class, args);
+        Application.launch(Bootstrap.class, args);
     }
 }

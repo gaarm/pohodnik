@@ -15,7 +15,7 @@
         </menus>
     </MenuBar>
 
-    <BorderPane fx:id="borderPaneOseba" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
         <top>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                 <children>
@@ -60,7 +60,7 @@
                                     <Insets right="10.0" />
                                 </padding>
                             </Label>
-                            <TextField fx:id="textName" prefHeight="31.0" prefWidth="122.0" promptText="Ime" />
+                            <TextField fx:id="textFirstname" prefHeight="31.0" prefWidth="122.0" promptText="Ime" />
                         </children>
                     </HBox>
                     <HBox>
@@ -83,6 +83,20 @@
                 </children>
             </VBox>
         </center>
+    </BorderPane>
+
+    <BorderPane fx:id="personExcursion">
+        <TableView fx:id="tableViewPersonExcursion" layoutX="26.0" layoutY="29.0" prefHeight="300.0" prefWidth="360.0">
+            <columns>
+                <TableColumn prefWidth="164.0" text="Ime">
+                    <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
+                </TableColumn>
+            </columns>
+            <TableColumn prefWidth="164.0" text="Udeleženec">
+                <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
+            </TableColumn>
+        </TableView>
+
     </BorderPane>
 
 </VBox>
