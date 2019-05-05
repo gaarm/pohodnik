@@ -1,19 +1,19 @@
 -- database script for sqlite
 CREATE TABLE person (
  id INTEGER PRIMARY KEY,
- name TEXT NOT NULL,
- surname TEXT NOT NULL,
- UNIQUE (name, surname)
+ first_name TEXT NOT NULL,
+ last_name TEXT NOT NULL,
+ UNIQUE (first_name, last_name)
 );
 
-CREATE TABLE pohod (
+CREATE TABLE excursion (
  id INTEGER PRIMARY KEY,
- naziv TEXT NOT NULL UNIQUE
+ name TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE oseba_pohod (
+CREATE TABLE person_excursion (
  id INTEGER PRIMARY KEY,
- oseba_id INTEGER NOT NULL,
- pohod_id INTEGER NOT NULL,
- UNIQUE (oseba_id, pohod_id)
+ person_id INTEGER NOT NULL,
+ excursion_id INTEGER NOT NULL,
+ UNIQUE (person_id, excursion_id)
 );
