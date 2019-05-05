@@ -31,6 +31,12 @@ public class ExcursionController {
     @FXML
     private TextField actionTarget;
 
+    @FXML
+    private void initialize() {
+        tableView.getSelectionModel().selectedItemProperty().addListener((observable) -> {
+            textName.setText(tableView.getSelectionModel().getSelectedItem().getName());
+        });
+    }
 
     @FXML
     private void handleSearchAction(ActionEvent event) throws SQLException {
