@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -32,7 +33,7 @@ public class PersonController {
     private TextField textSurname;
 
     @FXML
-    private TextField actionTarget;
+    private Label labelStatus;
 
     @FXML
     private void initialize() throws SQLException {
@@ -63,13 +64,12 @@ public class PersonController {
         DBConnection dbConnection = new DBConnection();
         Person person = new Person(textFirstname.getText(), textSurname.getText());
         if (dbConnection.addPerson(person)) {
-            actionTarget.setText("Uporabnik uspešno dodan!");
+            labelStatus.setText("Uporabnik uspešno dodan!");
             tableView.getItems().add(person);
             textFirstname.setText("");
             textSurname.setText("");
-
         } else {
-            actionTarget.setText("Napaka pri dodajanju!");
+            labelStatus.setText("Napaka pri dodajanju!");
         }
     }
 
@@ -80,7 +80,10 @@ public class PersonController {
             tableView.getSelectionModel().getSelectedItem().setName(textFirstname.getText());
             tableView.getSelectionModel().getSelectedItem().setSurname(textSurname.getText());
             DBConnection dbConnection = new DBConnection();
-            dbConnection.updatePerson(tableView.getSelectionModel().getSelectedItem());
+            if (dbConnection.updatePerson(tableView.getSelectionModel().getSelectedItem())) {
+                tableView.getItems().set(selectedIndex, tableView.getSelectionModel().getSelectedItem());
+                labelStatus.setText("Uspešen update");
+            }
         }
     }
 
@@ -89,8 +92,10 @@ public class PersonController {
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             DBConnection dbConnection = new DBConnection();
-            dbConnection.deletePerson(tableView.getSelectionModel().getSelectedItem());
-            tableView.getItems().remove(selectedIndex);
+            if (dbConnection.deletePerson(tableView.getSelectionModel().getSelectedItem())) {
+                labelStatus.setText("Uspešen delete");
+                tableView.getItems().remove(selectedIndex);
+            }
         }
     }
 
