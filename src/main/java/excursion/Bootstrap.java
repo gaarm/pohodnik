@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 public class Bootstrap extends Application {
 
     public static final String APP_TITLE = "Aplikacija pohodnik";
+    public static final String APP_TITLE_PERSON = "Pohodnik";
+    public static final String APP_TITLE_EXCURSION = "Izlet";
 
     @Override
     public void start(Stage stage) throws Exception {
