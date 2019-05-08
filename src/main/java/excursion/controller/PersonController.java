@@ -1,6 +1,6 @@
 package excursion.controller;
 
-import excursion.Bootstrap;
+import excursion.Localization;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import excursion.DBConnection;
 import excursion.model.Person;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -65,12 +66,12 @@ public class PersonController {
         DBConnection dbConnection = new DBConnection();
         Person person = new Person(textFirstname.getText(), textSurname.getText());
         if (dbConnection.addPerson(person)) {
-            labelStatus.setText("Uporabnik uspešno dodan!");
+            labelStatus.setText(Localization.APP_MSG_OPERATION_ADD_SUCCESS);
             tableView.getItems().add(person);
             textFirstname.setText("");
             textSurname.setText("");
         } else {
-            labelStatus.setText("Napaka pri dodajanju!");
+            labelStatus.setText(Localization.APP_MSG_OPERATION_ADD_ERROR);
         }
     }
 
@@ -83,7 +84,7 @@ public class PersonController {
             DBConnection dbConnection = new DBConnection();
             if (dbConnection.updatePerson(tableView.getSelectionModel().getSelectedItem())) {
                 tableView.getItems().set(selectedIndex, tableView.getSelectionModel().getSelectedItem());
-                labelStatus.setText("Uspešen update");
+                labelStatus.setText(Localization.APP_MSG_OPERATION_UPD_SUCCESS);
             }
         }
     }
@@ -94,7 +95,7 @@ public class PersonController {
         if (selectedIndex >= 0) {
             DBConnection dbConnection = new DBConnection();
             if (dbConnection.deletePerson(tableView.getSelectionModel().getSelectedItem())) {
-                labelStatus.setText("Uspešen delete");
+                labelStatus.setText(Localization.APP_MSG_OPERATION_DEL_SUCCESS);
                 tableView.getItems().remove(selectedIndex);
             }
         }
@@ -107,7 +108,7 @@ public class PersonController {
 
         Parent root = FXMLLoader.load(getClass().getResource("/Excursion.fxml"));
         stage.setScene(new Scene(root));
-        stage.setTitle(Bootstrap.APP_TITLE);
+        stage.setTitle(Localization.APP_TITLE);
         stage.setResizable(false);
         stage.show();
     }
