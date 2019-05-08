@@ -57,6 +57,7 @@ public class PersonController {
 
         ObservableList<Person> data = FXCollections.observableList(personList);
         tableView.getItems().setAll(data);
+        labelStatus.setText("");
     }
 
     @FXML

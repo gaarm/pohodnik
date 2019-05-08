@@ -54,6 +54,7 @@ public class ExcursionController {
 
         ObservableList<Excursion> data = FXCollections.observableList(excursionList);
         tableView.getItems().setAll(data);
+        labelStatus.setText("");
     }
 
     @FXML
