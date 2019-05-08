@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -29,7 +30,8 @@ public class ExcursionController {
     private TextField textName;
 
     @FXML
-    private TextField actionTarget;
+    private Label labelStatus;
+
 
     @FXML
     private void initialize() throws SQLException {
@@ -59,11 +61,11 @@ public class ExcursionController {
         DBConnection dbConnection = new DBConnection();
         Excursion excursion = new Excursion(textName.getText());
         if (dbConnection.addExcursion(excursion)) {
-            actionTarget.setText("Pohod uspešno dodan!");
+            labelStatus.setText("Pohod uspešno dodan!");
             tableView.getItems().add(excursion);
             textName.setText("");
         } else {
-            actionTarget.setText("Napaka pri dodajanju!");
+            labelStatus.setText("Napaka pri dodajanju!");
         }
     }
 
@@ -73,7 +75,10 @@ public class ExcursionController {
         if (selectedIndex >= 0) {
             tableView.getSelectionModel().getSelectedItem().setName(textName.getText());
             DBConnection dbConnection = new DBConnection();
-            dbConnection.updateExcursion(tableView.getSelectionModel().getSelectedItem());
+            if (dbConnection.updateExcursion(tableView.getSelectionModel().getSelectedItem())) {
+                tableView.getItems().set(selectedIndex, tableView.getSelectionModel().getSelectedItem());
+                labelStatus.setText("Uspešen update");
+            }
         }
     }
 
@@ -82,8 +87,10 @@ public class ExcursionController {
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             DBConnection dbConnection = new DBConnection();
-            dbConnection.deleteExcursion(tableView.getSelectionModel().getSelectedItem());
-            tableView.getItems().remove(selectedIndex);
+            if (dbConnection.deleteExcursion(tableView.getSelectionModel().getSelectedItem())) {
+                labelStatus.setText("Uspešen delete");
+                tableView.getItems().remove(selectedIndex);
+            }
         }
     }
 

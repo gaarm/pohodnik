@@ -55,7 +55,7 @@
                 <children>
                     <HBox>
                         <children>
-                            <Label text="User name">
+                            <Label text="Ime">
                                 <padding>
                                     <Insets right="10.0" />
                                 </padding>
@@ -65,7 +65,7 @@
                     </HBox>
                     <HBox>
                         <children>
-                            <Label prefHeight="21.0" prefWidth="82.0" text="Email">
+                            <Label prefHeight="21.0" prefWidth="82.0" text="Priimek">
                                 <padding>
                                     <Insets right="10.0" />
                                 </padding>
