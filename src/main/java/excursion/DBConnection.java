@@ -2,6 +2,8 @@ package excursion;
 
 import excursion.model.Excursion;
 import excursion.model.Person;
+import excursion.model.PersonExcursion;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class DBConnection {
     }
 
     public List<Person> getPersons(String searchString) throws SQLException {
+        System.out.println(searchString);
         String query = "SELECT * FROM oseba WHERE ime LIKE ? OR priimek LIKE ?";
         List<Person> personList = new ArrayList<>();
 
@@ -227,5 +230,34 @@ public class DBConnection {
             }
         }
         return false;
+    }
+
+    public List<PersonExcursion> getPersonExcursions(int personId) throws SQLException {
+        String query = "SELECT * FROM oseba_pohod WHERE oseba_id = ?";
+        List<PersonExcursion> personExcursionList = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, personId);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                personExcursionList.add(new PersonExcursion(rs.getInt("oseba_id"),
+                        rs.getInt("pohod_id"))
+                );
+            }
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(DBConnection.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+        return personExcursionList;
     }
 }
