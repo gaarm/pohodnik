@@ -2,11 +2,13 @@ package excursion.controller;
 
 import excursion.Localization;
 import excursion.model.Excursion;
+import excursion.model.PersonExcursion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -23,6 +25,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class PersonController {
+
+    private static final String cbId = "cbId-";
 
     @FXML
     private TableView<Person> tableView;
@@ -41,25 +45,43 @@ public class PersonController {
 
     @FXML
     private HBox hBox;
+
     @FXML
     private void initialize() throws SQLException {
         DBConnection dbConnection = new DBConnection();
         List<Person> personList = dbConnection.getPersons("");
+        List<Excursion> excursionList = dbConnection.getExcursions("");
 
         ObservableList<Person> data = FXCollections.observableList(personList);
         tableView.getItems().setAll(data);
 
-        tableView.getSelectionModel().selectedItemProperty().addListener((observable) -> {
-            textFirstname.setText(tableView.getSelectionModel().getSelectedItem().getName());
-            textSurname.setText(tableView.getSelectionModel().getSelectedItem().getSurname());
-        });
-
-        List<Excursion> excursionList = dbConnection.getExcursions("");
         for (Excursion excursion : excursionList) {
             CheckBox cb = new CheckBox(excursion.getName());
-            //cb.setSelected(true);
+            cb.setId(PersonController.cbId + excursion.getId());
             hBox.getChildren().add(cb);
         }
+
+        tableView.getSelectionModel().selectedItemProperty().addListener((observable) -> {
+            Person selectedPerson = tableView.getSelectionModel().getSelectedItem();
+            textFirstname.setText(selectedPerson.getName());
+            textSurname.setText(selectedPerson.getSurname());
+
+            try {
+                List<PersonExcursion> personExcursionList = dbConnection.getPersonExcursions(selectedPerson.getId());
+
+                for (Node node : hBox.getChildren()) {
+                    for (PersonExcursion personExcursion : personExcursionList) {
+                        if (node.getId().equals(PersonController.cbId + personExcursion.getExcursionId())) {
+                             ((CheckBox) node).setSelected(true);
+                        } else {
+                            ((CheckBox) node).setSelected(false);
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @FXML
