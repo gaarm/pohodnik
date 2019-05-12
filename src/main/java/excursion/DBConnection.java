@@ -19,12 +19,8 @@ public class DBConnection {
     public DBConnection() {
 
         try {
-            //String url = "jdbc:mysql://localhost:3306/excursion?useSSL=false";
             String url = "jdbc:sqlite:C:\\Users\\gaspe\\IdeaProjects\\db-sqlite\\database.db";
-            String user = "root";
-            String password = "example";
-
-            conn = DriverManager.getConnection(url, user, password);
+            conn = DriverManager.getConnection(url);
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DBConnection.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
