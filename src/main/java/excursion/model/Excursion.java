@@ -1,7 +1,7 @@
 package excursion.model;
 
 public class Excursion {
-    private int id = 0;
+    private int id;
     private String name;
 
     public Excursion(int id, String name) {

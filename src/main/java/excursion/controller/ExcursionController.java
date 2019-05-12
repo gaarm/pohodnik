@@ -1,5 +1,6 @@
 package excursion.controller;
 
+import excursion.Bootstrap;
 import excursion.Localization;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -103,7 +104,7 @@ public class ExcursionController {
 
         Parent root = FXMLLoader.load(getClass().getResource("/Person.fxml"));
         stage.setScene(new Scene(root));
-        stage.setTitle(Localization.APP_TITLE);
+        stage.setScene(new Scene(root, Bootstrap.APP_SCENE_WIDTH, Bootstrap.APP_SCENE_HEIGHT));
         stage.setResizable(false);
         stage.show();
     }

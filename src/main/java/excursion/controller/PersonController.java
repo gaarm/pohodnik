@@ -1,5 +1,6 @@
 package excursion.controller;
 
+import excursion.Bootstrap;
 import excursion.Localization;
 import excursion.model.Excursion;
 import excursion.model.PersonExcursion;
@@ -139,7 +140,7 @@ public class PersonController {
 
         Parent root = FXMLLoader.load(getClass().getResource("/Excursion.fxml"));
         stage.setScene(new Scene(root));
-        stage.setTitle(Localization.APP_TITLE);
+        stage.setScene(new Scene(root, Bootstrap.APP_SCENE_WIDTH, Bootstrap.APP_SCENE_HEIGHT));
         stage.setResizable(false);
         stage.show();
     }
