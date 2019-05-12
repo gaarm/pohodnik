@@ -66,7 +66,6 @@ public class PersonController {
             Person selectedPerson = tableView.getSelectionModel().getSelectedItem();
             textFirstname.setText(selectedPerson.getName());
             textSurname.setText(selectedPerson.getSurname());
-            System.out.println(selectedPerson.getName());
             try {
                 List<PersonExcursion> personExcursionList = dbConnection.getPersonExcursions(selectedPerson);
                 for (Node node : hBox.getChildren()) {

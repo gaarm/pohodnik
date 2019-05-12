@@ -33,7 +33,7 @@ public class DBConnection {
 
     public List<Person> getPersons(String searchString) throws SQLException {
         System.out.println(searchString);
-        String query = "SELECT * FROM oseba WHERE ime LIKE ? OR priimek LIKE ?";
+        String query = "SELECT * FROM person WHERE first_name LIKE ? OR last_name LIKE ?";
         List<Person> personList = new ArrayList<>();
 
         try {
@@ -44,8 +44,8 @@ public class DBConnection {
 
             while (rs.next()) {
                 personList.add(new Person(rs.getInt("id"),
-                        rs.getString("ime"),
-                        rs.getString("priimek"))
+                        rs.getString("first_name"),
+                        rs.getString("last_name"))
                 );
             }
         } catch (SQLException ex) {
@@ -64,7 +64,7 @@ public class DBConnection {
     }
 
     public boolean addPerson(Person person) {
-        String query = "INSERT INTO oseba (ime, priimek) VALUES (?, ?)";
+        String query = "INSERT INTO person (first_name, last_name) VALUES (?, ?)";
 
         try {
             ps = conn.prepareStatement(query);
@@ -89,7 +89,7 @@ public class DBConnection {
     public boolean updatePerson(Person person) {
         System.out.println(person.getName());
 
-        String query = "UPDATE oseba SET ime = ?, priimek = ? WHERE id = ?";
+        String query = "UPDATE person SET first_name = ?, last_name = ? WHERE id = ?";
 
         try {
             ps = conn.prepareStatement(query);
@@ -113,7 +113,7 @@ public class DBConnection {
     }
 
     public boolean deletePerson(Person person) {
-        String query = "DELETE FROM oseba WHERE id = ?";
+        String query = "DELETE FROM person WHERE id = ?";
 
         try {
             ps = conn.prepareStatement(query);
@@ -135,7 +135,7 @@ public class DBConnection {
     }
 
     public List<Excursion> getExcursions(String searchString) throws SQLException {
-        String query = "SELECT * FROM pohod WHERE naziv LIKE ?";
+        String query = "SELECT * FROM excursion WHERE name LIKE ?";
         List<Excursion> excursionList = new ArrayList<>();
 
         try {
@@ -145,7 +145,7 @@ public class DBConnection {
 
             while (rs.next()) {
                 excursionList.add(new Excursion(rs.getInt("id"),
-                        rs.getString("naziv"))
+                        rs.getString("name"))
                 );
             }
         } catch (SQLException ex) {
@@ -164,7 +164,7 @@ public class DBConnection {
     }
 
     public boolean addExcursion(Excursion excursion) {
-        String query = "INSERT INTO pohod (naziv) VALUES (?)";
+        String query = "INSERT INTO excursion (name) VALUES (?)";
 
         try {
             ps = conn.prepareStatement(query);
@@ -187,7 +187,7 @@ public class DBConnection {
 
     public boolean updateExcursion(Excursion excursion) {
 
-        String query = "UPDATE pohod SET naziv = ? WHERE id = ?";
+        String query = "UPDATE excursion SET name = ? WHERE id = ?";
 
         try {
             ps = conn.prepareStatement(query);
@@ -211,7 +211,7 @@ public class DBConnection {
 
 
     public boolean deleteExcursion(Excursion excursion) {
-        String query = "DELETE FROM pohod WHERE id = ?";
+        String query = "DELETE FROM excursion WHERE id = ?";
 
         try {
             ps = conn.prepareStatement(query);
@@ -233,7 +233,7 @@ public class DBConnection {
     }
 
     public List<PersonExcursion> getPersonExcursions(Person person) throws SQLException {
-        String query = "SELECT * FROM oseba_pohod WHERE oseba_id = ?";
+        String query = "SELECT * FROM person_excursion WHERE person_id = ?";
         List<PersonExcursion> personExcursionList = new ArrayList<>();
 
         try {
@@ -242,8 +242,8 @@ public class DBConnection {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                personExcursionList.add(new PersonExcursion(rs.getInt("oseba_id"),
-                        rs.getInt("pohod_id"))
+                personExcursionList.add(new PersonExcursion(rs.getInt("person_id"),
+                        rs.getInt("excursion_id"))
                 );
             }
         } catch (SQLException ex) {
@@ -262,7 +262,7 @@ public class DBConnection {
     }
 
     public boolean addPersonExcursion(Person person, int excursionId) {
-        String query = "INSERT INTO oseba_pohod (oseba_id, pohod_id) VALUES (?, ?)";
+        String query = "INSERT INTO person_excursion (person_id, excursion_id) VALUES (?, ?)";
 
         try {
             ps = conn.prepareStatement(query);
@@ -285,7 +285,7 @@ public class DBConnection {
     }
 
     public boolean deletePersonExcursion(Person person, int excursionId) {
-        String query = "DELETE FROM oseba_pohod WHERE oseba_id = ? and pohod_id = ?";
+        String query = "DELETE FROM person_excursion WHERE person_id = ? and excursion_id = ?";
 
         try {
             ps = conn.prepareStatement(query);
