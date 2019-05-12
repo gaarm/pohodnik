@@ -232,13 +232,13 @@ public class DBConnection {
         return false;
     }
 
-    public List<PersonExcursion> getPersonExcursions(int personId) throws SQLException {
+    public List<PersonExcursion> getPersonExcursions(Person person) throws SQLException {
         String query = "SELECT * FROM oseba_pohod WHERE oseba_id = ?";
         List<PersonExcursion> personExcursionList = new ArrayList<>();
 
         try {
             ps = conn.prepareStatement(query);
-            ps.setInt(1, personId);
+            ps.setInt(1, person.getId());
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -259,5 +259,51 @@ public class DBConnection {
         }
 
         return personExcursionList;
+    }
+
+    public boolean addPersonExcursion(Person person, int excursionId) {
+        String query = "INSERT INTO oseba_pohod (oseba_id, pohod_id) VALUES (?, ?)";
+
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, person.getId());
+            ps.setInt(2, excursionId);
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(DBConnection.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+
+            }
+        }
+        return false;
+    }
+
+    public boolean deletePersonExcursion(Person person, int excursionId) {
+        String query = "DELETE FROM oseba_pohod WHERE oseba_id = ? and pohod_id = ?";
+
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, person.getId());
+            ps.setInt(2, excursionId);
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(DBConnection.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+
+            }
+        }
+        return false;
     }
 }

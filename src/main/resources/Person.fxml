@@ -80,7 +80,14 @@
                             <Button fx:id="edit" onAction="#handleEditAction" prefHeight="31.0" prefWidth="61.0" text="Shrani" />
                         </children>
                     </HBox>
-                    <HBox fx:id="hBox"></HBox>
+                    <HBox fx:id="hBox">
+                        <children></children>
+                    </HBox>
+                    <HBox>
+                        <children>
+                            <Button fx:id="saveExcursions" onAction="#handleSaveExcursionsAction" text="Shrani izbiro ekskurzij" />
+                        </children>
+                    </HBox>
                 </children>
             </VBox>
         </center>

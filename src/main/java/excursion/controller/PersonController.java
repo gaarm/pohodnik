@@ -48,6 +48,7 @@ public class PersonController {
 
     @FXML
     private void initialize() throws SQLException {
+
         DBConnection dbConnection = new DBConnection();
         List<Person> personList = dbConnection.getPersons("");
         List<Excursion> excursionList = dbConnection.getExcursions("");
@@ -65,16 +66,14 @@ public class PersonController {
             Person selectedPerson = tableView.getSelectionModel().getSelectedItem();
             textFirstname.setText(selectedPerson.getName());
             textSurname.setText(selectedPerson.getSurname());
-
+            System.out.println(selectedPerson.getName());
             try {
-                List<PersonExcursion> personExcursionList = dbConnection.getPersonExcursions(selectedPerson.getId());
-
+                List<PersonExcursion> personExcursionList = dbConnection.getPersonExcursions(selectedPerson);
                 for (Node node : hBox.getChildren()) {
+                    ((CheckBox) node).setSelected(false);
                     for (PersonExcursion personExcursion : personExcursionList) {
                         if (node.getId().equals(PersonController.cbId + personExcursion.getExcursionId())) {
-                             ((CheckBox) node).setSelected(true);
-                        } else {
-                            ((CheckBox) node).setSelected(false);
+                            ((CheckBox) node).setSelected(true);
                         }
                     }
                 }
@@ -144,5 +143,23 @@ public class PersonController {
         stage.setTitle(Localization.APP_TITLE);
         stage.setResizable(false);
         stage.show();
+    }
+
+    @FXML
+    public void handleSaveExcursionsAction(ActionEvent actionEvent) {
+        int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
+        Person selectedPerson = tableView.getSelectionModel().getSelectedItem();
+        if (selectedIndex >= 0) {
+            DBConnection dbConnection = new DBConnection();
+
+            for (Node node : hBox.getChildren()) {
+                String[] cbId = ((CheckBox) node).getId().split("-");
+                int excursionId = Integer.parseInt(cbId[1]);
+                dbConnection.deletePersonExcursion(selectedPerson, excursionId);
+                if (((CheckBox) node).isSelected()) {
+                    dbConnection.addPersonExcursion(selectedPerson, excursionId);
+                }
+            }
+        }
     }
 }
