@@ -1,5 +1,5 @@
-# 1 Aplikacija ´excursion´
-Aplikacija "excursion" je sistem za vodenje evidence pohodnikov ter njihovega udeleževanja na pohodih.
+# 1 Aplikacija ´hiking´
+Aplikacija "hiking" je sistem za vodenje evidence pohodnikov ter njihovega udeleževanja na pohodih.
 
 ## 1.1 Tehnologija
 Aplikacija je spisana v programskem jeziku JAVA (ver 11). Gre za desktop aplikacijo, kjer je uporabljena knjižnica javafx.
@@ -12,7 +12,7 @@ Aplikacija je spisana za študijske potrebe na FOV MAG IS, pri predmetu OOARIS.
 Aplikacija uporablja sqlite bazo za shranjevanje podatkov. Strukturo baze lahko najdete tu => `resources/database.sql`.
 
 ## 1.4 Build
-Po uspešno izvedenem buildu ste skreirali jar datoteko (`excursion-app-1.0-SNAPSHOT.jar`)
+Po uspešno izvedenem buildu ste skreirali jar datoteko (`hiking-app-1.0-SNAPSHOT.jar`)
 
 ## 1.4 Zagon aplikacije
 Za zagon aplikacije morate zadostiti nekaj predpogojev:
@@ -21,4 +21,4 @@ Za zagon aplikacije morate zadostiti nekaj predpogojev:
  - Na računalniku morate imeti sqlite bazo. Več informacij pod točko 1.3.
  
  Zagon:
- ```$ java -jar excursion-app-1.0-SNAPSHOT.jar  --module-path="C:\Program Files\Java\javafx-sdk-11\lib" --add-modules=javafx.controls,javafx.fxml```
+ ```$ java -jar hiking-app-1.0-SNAPSHOT.jar  --module-path="C:\Program Files\Java\javafx-sdk-11\lib" --add-modules=javafx.controls,javafx.fxml```

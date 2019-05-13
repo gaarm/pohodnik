@@ -1,8 +1,8 @@
-package excursion;
+package hiking;
 
-import excursion.model.Excursion;
-import excursion.model.Person;
-import excursion.model.PersonExcursion;
+import hiking.model.Excursion;
+import hiking.model.Person;
+import hiking.model.PersonExcursion;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
-package excursion.controller;
+package hiking.controller;
 
-import excursion.Main;
-import excursion.Localization;
+import hiking.Main;
+import hiking.Localization;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,8 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import excursion.DBConnection;
-import excursion.model.Excursion;
+import hiking.DBConnection;
+import hiking.model.Excursion;
 
 import java.io.IOException;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package excursion.model;
+package hiking.model;
 
 public class PersonExcursion {
     private int id;

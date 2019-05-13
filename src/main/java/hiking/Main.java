@@ -1,4 +1,4 @@
-package excursion;
+package hiking;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

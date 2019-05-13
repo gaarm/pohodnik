@@ -1,4 +1,4 @@
-package excursion;
+package hiking;
 
 public class Bootstrap {
 

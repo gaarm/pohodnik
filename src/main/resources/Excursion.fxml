@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="excursion.controller.ExcursionController" >
+<VBox id="vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="hiking.controller.ExcursionController" >
     <MenuBar id="menuBar" focusTraversable="true" >
         <menus>
             <Menu text="Meni">

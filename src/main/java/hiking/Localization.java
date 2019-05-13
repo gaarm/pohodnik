@@ -1,4 +1,4 @@
-package excursion;
+package hiking;
 
 public class Localization {
     public static final String APP_TITLE = "Aplikacija pohodnik";
