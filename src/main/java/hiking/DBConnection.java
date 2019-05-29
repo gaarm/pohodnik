@@ -21,9 +21,9 @@ public class DBConnection {
     public DBConnection() {
 
         try {
-            Path applicationPath = Paths.get(System.getProperty("user.home")).resolve("pohodnik").resolve("sqlite");
+            Path applicationPath = Paths.get(System.getProperty("user.home")).resolve("sqlite").resolve("database.db");
 
-            String url = "jdbc:sqlite:" + applicationPath.toString() + "\\database.db";
+            String url = "jdbc:sqlite:" + applicationPath.toString();
             conn = DriverManager.getConnection(url);
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DBConnection.class.getName());
