@@ -21,5 +21,20 @@ Aplikacija uporablja `sqlite` podatkovno bazo za shranjevanje podatkov. Imate dv
 Aplikacija pričakuje da se baza nahaja na uporabnikovem domačem direktoriju po direktorijem `sqlite`:
 `c:\Users\<User>\sqlite\database.db`.
 
+## 2 Navodila za uporabo
 
+### 2.1 Pohodnik
+V osnovi aplikacija omogoča vnos pohodnika. Preko menija izberemo ustrezno okno. Pri pohodniku  je omogočeno naslednje:
+ - dodajanja novega
+ - brisanje obstoječih
+ - editiranje obstoječih
+ - iskanje pohodnika
+ - prijava pohodnika na ustrezen izlet (checkbox)
 
+![pohodnik-1](assets\pohodnik-1.png)
+![pohodnik-2](assets\pohodnik-2.png)
+![pohodnik-iskanje](assets\pohodnik-iskanje.png)
+
+### 2.1 Izlet
+Podobno je pri izletu. Tudi tu imamo na voljo vse osnovne funkcije - dodaj, išči, popravi, briši.
+![izlet-1](assets\izlet-1.png)
