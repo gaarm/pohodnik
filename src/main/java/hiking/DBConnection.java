@@ -4,6 +4,8 @@ import hiking.model.Excursion;
 import hiking.model.Person;
 import hiking.model.PersonExcursion;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,9 @@ public class DBConnection {
     public DBConnection() {
 
         try {
-            String url = "jdbc:sqlite:C:\\Users\\gaspe\\IdeaProjects\\db-sqlite\\database.db";
+            Path applicationPath = Paths.get(System.getProperty("user.home")).resolve("pohodnik").resolve("sqlite");
+
+            String url = "jdbc:sqlite:" + applicationPath.toString() + "\\database.db";
             conn = DriverManager.getConnection(url);
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DBConnection.class.getName());
