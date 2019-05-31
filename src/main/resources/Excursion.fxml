@@ -65,7 +65,7 @@
                         <children>
                             <Button fx:id="delete" onAction="#handleDeleteAction" text="Izbriši" />
                             <Button fx:id="add" mnemonicParsing="false" onAction="#handleAddAction" text="Dodaj novega" />
-                            <Button fx:id="edit" onAction="#handleEditAction" prefHeight="31.0" prefWidth="61.0" text="Shrani" />
+                            <Button fx:id="edit" onAction="#handleEditAction" text="Shrani" />
                         </children>
                     </HBox>
                 </children>
