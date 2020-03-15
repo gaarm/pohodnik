@@ -19,6 +19,7 @@
             <properties>
                 <sonar.sources>.</sonar.sources>
                 <sonar.inclusions>src/main/java/**,src/main/resources/**</sonar.inclusions>
+                <sonar.projectName>fov</sonar.projectName>
                 <sonar.projectKey>pohodnik-app</sonar.projectKey>
                 <sonar.organization>gaarm</sonar.organization>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
