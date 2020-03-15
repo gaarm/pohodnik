@@ -17,7 +17,7 @@
         <profile>
             <id>sonar</id>
             <properties>
-                <sonar.sources>.</sonar.sources>
+                <sonar.sources>src/main/java/**</sonar.sources>
                 <sonar.inclusions>src/main/java/**,src/main/resources/**</sonar.inclusions>
                 <sonar.projectName>fov</sonar.projectName>
                 <sonar.projectKey>pohodnik-app</sonar.projectKey>
