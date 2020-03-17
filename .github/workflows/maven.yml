@@ -43,5 +43,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: List command
-      - name: SonarCloud Scan
         run: ls -la target
