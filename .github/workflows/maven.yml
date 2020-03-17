@@ -20,7 +20,7 @@ jobs:
       with:
         java-version: 11
     - name: List before build
-      run: ls -la target
+      run: ls -la
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: List after build (target directory)
