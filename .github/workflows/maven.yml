@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    name: Zbuildaj projekt
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -24,9 +25,8 @@ jobs:
       run: ls -la target
 
   sonar:
-    name: Test - SonarCloud Scan
+    name: Zaženi statično analizo kode
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v1
       - name: Set up JDK 11
