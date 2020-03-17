@@ -43,4 +43,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: List command
-        run: ls -la target
+        run: ls -la
