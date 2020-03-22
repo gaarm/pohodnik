@@ -7,11 +7,39 @@ on:
     branches: [ develop, master ]
 
 jobs:
-  build:
-    name: Zbuildaj projekt
+  unit:
+    name: Unit-test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+      - name: Run unit-test
+        run: mvn test
+
+  sonar:
+    name: Static analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+      - name: SonarCloud Scan
+        run: mvn -B clean verify -Psonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
     - name: Set up JDK 1.11
+      uses: actions/setup-java@v1
       with:
         java-version: 11
     - name: List before build
@@ -21,14 +49,3 @@ jobs:
     - name: List after build (target directory)
       run: ls -la target
 
-  sonar:
-    name: Zaženi statično analizo kode
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up JDK 11
-        with:
-          java-version: 1.11
-      - name: SonarCloud Scan
-        run: mvn -B clean verify -Psonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
