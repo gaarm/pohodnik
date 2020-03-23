@@ -40,15 +40,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - name: List before build
-      run: ls -la
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: List after build (target directory)
-      run: ls -la target
-    - name: Archive production artifacts
+    - name: Archive build artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: target
-        path: target
+        name: jar
+        path: target/*
 
