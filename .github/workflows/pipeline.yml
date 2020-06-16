@@ -6,16 +6,15 @@ on:
 
 jobs:
   shellcmd:
-    name: OnPush
+    name: Some info
     runs-on: ubuntu-latest
     steps:
-      - name: List dir
+      - name: Some info
         run: |
           lsb_release -a
           date
           pwd
-          ls -la
-          
+                    
   unit:
     name: Unit-test
     runs-on: ubuntu-latest
