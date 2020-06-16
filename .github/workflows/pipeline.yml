@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Some info
         run: |
-          lsb_release -a
+          lsb_release
           date
           pwd
                     
