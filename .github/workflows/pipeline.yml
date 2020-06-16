@@ -5,6 +5,17 @@ on:
     branches: [ develop, master ]
 
 jobs:
+  shellcmd:
+    name: OnPush
+    runs-on: ubuntu-latest
+    steps:
+      - name: List dir
+        run: |
+          lsb_release -a
+          date
+          pwd
+          ls -la
+          
   unit:
     name: Unit-test
     runs-on: ubuntu-latest
