@@ -5,15 +5,6 @@ on:
     branches: [ develop, master ]
 
 jobs:
-  shellcmd:
-    name: Some info
-    runs-on: ubuntu-latest
-    steps:
-      - name: Some info
-        run: |
-          lsb_release
-          date
-          pwd
                     
   unit:
     name: Unit-test
